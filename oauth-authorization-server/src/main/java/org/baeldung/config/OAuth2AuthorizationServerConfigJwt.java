@@ -1,7 +1,5 @@
 package org.baeldung.config;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -14,8 +12,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
-import org.springframework.security.oauth2.provider.token.TokenEnhancer;
-import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
@@ -36,13 +32,13 @@ public class OAuth2AuthorizationServerConfigJwt extends AuthorizationServerConfi
     @Override
     public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory().withClient("sampleClientId").authorizedGrantTypes("implicit").scopes("read", "write", "foo", "bar").autoApprove(false).accessTokenValiditySeconds(3600).and().withClient("fooClientIdPassword").secret("secret")
-            .authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("foo", "read", "write").accessTokenValiditySeconds(3600)
-            // 1 hour
-            .refreshTokenValiditySeconds(2592000)
-            // 30 days
-            .and().withClient("barClientIdPassword").secret("secret").authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("bar", "read", "write").accessTokenValiditySeconds(3600)
-            // 1 hour
-            .refreshTokenValiditySeconds(2592000) // 30 days
+                .authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("foo", "read", "write").accessTokenValiditySeconds(3600)
+                // 1 hour
+                .refreshTokenValiditySeconds(2592000)
+                // 30 days
+                .and().withClient("barClientIdPassword").secret("secret").authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("bar", "read", "write").accessTokenValiditySeconds(3600)
+                // 1 hour
+                .refreshTokenValiditySeconds(2592000) // 30 days
         ;
     }
 
@@ -57,9 +53,7 @@ public class OAuth2AuthorizationServerConfigJwt extends AuthorizationServerConfi
 
     @Override
     public void configure(final AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        final TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancer(), accessTokenConverter()));
-        endpoints.tokenStore(tokenStore()).tokenEnhancer(tokenEnhancerChain).authenticationManager(authenticationManager);
+        endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager);
     }
 
     @Bean
@@ -72,11 +66,6 @@ public class OAuth2AuthorizationServerConfigJwt extends AuthorizationServerConfi
         final JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         converter.setSigningKey("123");
         return converter;
-    }
-
-    @Bean
-    public TokenEnhancer tokenEnhancer() {
-        return new CustomTokenEnhancer();
     }
 
 }
