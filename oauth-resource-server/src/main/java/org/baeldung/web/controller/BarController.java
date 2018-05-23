@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class BarController {
 
     // API - write, secured with scopes
-    @PreAuthorize("#oauth2.hasScope('bar') and #oauth2.hasScope('read')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.GET, value = "/bars/{id}")
     @ResponseBody
     public Bar findById(@PathVariable final long id) {
