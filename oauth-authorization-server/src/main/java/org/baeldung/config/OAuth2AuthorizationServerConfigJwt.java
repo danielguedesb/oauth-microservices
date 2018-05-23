@@ -30,31 +30,28 @@ public class OAuth2AuthorizationServerConfigJwt extends AuthorizationServerConfi
     }
 
     @Override
-    public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory().withClient("sampleClientId").authorizedGrantTypes("implicit").scopes("read", "write", "foo", "bar").autoApprove(false).accessTokenValiditySeconds(3600).and().withClient("fooClientIdPassword").secret("secret")
-                .authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("foo", "read", "write").accessTokenValiditySeconds(3600)
-                // 1 hour
-                .refreshTokenValiditySeconds(2592000)
-                // 30 days
-                .and().withClient("barClientIdPassword").secret("secret").authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("bar", "read", "write").accessTokenValiditySeconds(3600)
-                // 1 hour
-                .refreshTokenValiditySeconds(2592000) // 30 days
-        ;
-    }
-
-    @Bean
-    @Primary
-    public DefaultTokenServices tokenServices() {
-        final DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-        defaultTokenServices.setTokenStore(tokenStore());
-        defaultTokenServices.setSupportRefreshToken(true);
-        return defaultTokenServices;
+    public void configure(final AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager).accessTokenConverter(accessTokenConverter());
     }
 
     @Override
-    public void configure(final AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager);
-    }
+    public void configure(final ClientDetailsServiceConfigurer clients) throws Exception { // @formatter:off
+        clients
+          .inMemory()
+          .withClient("sampleClientId")
+            .authorizedGrantTypes("implicit").scopes("read", "write", "foo", "bar").autoApprove(false).accessTokenValiditySeconds(3600)
+            
+          .and()
+          .withClient("fooClientIdPassword").secret("secret")
+            .authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("foo", "read", "write")
+            .accessTokenValiditySeconds(3600 /*1 hour*/).refreshTokenValiditySeconds(2592000 /*30 days*/)
+          
+          .and()
+            .withClient("barClientIdPassword").secret("secret")
+            .authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("bar", "read", "write")
+            .accessTokenValiditySeconds(3600 /*1 hour*/).refreshTokenValiditySeconds(2592000 /*30 days*/)
+        ;
+    } // @formatter:on
 
     @Bean
     public TokenStore tokenStore() {
@@ -63,9 +60,18 @@ public class OAuth2AuthorizationServerConfigJwt extends AuthorizationServerConfi
 
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
-        final JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         converter.setSigningKey("123");
         return converter;
+    }
+
+    @Bean
+    @Primary
+    public DefaultTokenServices tokenServices() {
+        DefaultTokenServices tokenServices = new DefaultTokenServices();
+        tokenServices.setTokenStore(tokenStore());
+        tokenServices.setSupportRefreshToken(true);
+        return tokenServices;
     }
 
 }

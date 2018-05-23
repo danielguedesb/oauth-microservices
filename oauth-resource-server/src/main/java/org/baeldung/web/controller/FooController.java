@@ -17,10 +17,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 public class FooController {
 
-    public FooController() {
-        super();
-    }
-
     // API - read
     @PreAuthorize("#oauth2.hasScope('foo') and #oauth2.hasScope('read')")
     @RequestMapping(method = RequestMethod.GET, value = "/foos/{id}")

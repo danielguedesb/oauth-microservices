@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -14,11 +15,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void globalUserDetails(final AuthenticationManagerBuilder auth) throws Exception {
         // @formatter:off
-	auth.inMemoryAuthentication()
-	  .withUser("john").password("123").roles("USER").and()
-	  .withUser("tom").password("111").roles("ADMIN").and()
-	  .withUser("user1").password("pass").roles("USER").and()
-	  .withUser("admin").password("nimda").roles("ADMIN");
+	auth.inMemoryAuthentication()  
+	.withUser("john").password("123").roles("USER")
+	.and().withUser("tom").password("{noop}111").roles("ADMIN")
+	.and().withUser("user1").password("{noop}pass").roles("USER")
+	.and().withUser("admin").password("{noop}nimda").roles("ADMIN");
     }// @formatter:on
 
     @Override
@@ -39,4 +40,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// @formatter:on
     }
 
+    @SuppressWarnings("deprecation")
+    @Bean
+    public static NoOpPasswordEncoder passwordEncoder() {
+        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
+    }
 }

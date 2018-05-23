@@ -52,7 +52,7 @@
         <commons-io.version>2.4</commons-io.version>
 
         <!-- testing -->
-        <rest-assured.version>2.9.0</rest-assured.version>
+        <rest-assured.version>3.1.0</rest-assured.version>
 
         <!-- Maven plugins -->
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>

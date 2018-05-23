@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UserController {
+
     @Autowired
     private TokenStore tokenStore;
 
@@ -27,4 +28,5 @@ public class UserController {
         System.out.println(accessToken);
         return accessToken.getAdditionalInformation();
     }
+
 }
