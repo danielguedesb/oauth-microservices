@@ -5,11 +5,13 @@ import static org.junit.Assert.assertNotNull;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
+@Ignore
 public class AuthorizationServerLiveTest {
 
     @Test
