@@ -74,6 +74,7 @@
     <modules>
         <module>oauth-authorization-server</module>
         <module>api-gateway</module>
+        <module>api-gateway-zuul</module>
         <module>oauth-resource-server-1</module>
         <module>oauth-resource-server-2</module>
     </modules>

@@ -1,0 +1,15 @@
+server:
+  port: 8080
+  
+zuul:  
+  routes:    
+    startpage:
+      path: /**
+      url: http://localhost:8081
+    foos:      
+      path: /foos/**
+      url: http://localhost:8082/oauth-resource-server-1/foos
+    third:
+      path: /third/**
+      url: http://localhost:8083/oauth-resource-server-2/third
+
