@@ -1,13 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <groupId>org.baeldung</groupId>
     <artifactId>spring-security-oauth</artifactId>
     <version>1.0.1-SNAPSHOT</version>
-    
+
     <packaging>pom</packaging>
-    
+
     <name>spring-security-oauth</name>
 
     <parent>
@@ -19,7 +19,7 @@
 
     <build>
         <finalName>spring-security-oauth</finalName>
-        
+
         <pluginManagement>
             <plugins>
 
@@ -46,6 +46,15 @@
         </pluginManagement>
     </build>
 
+    <dependencies>
+        
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        
+    </dependencies>
+
     <properties>
         <!-- util -->
         <commons-lang3.version>3.4</commons-lang3.version>
@@ -64,7 +73,8 @@
 
     <modules>
         <module>oauth-authorization-server</module>
-        <module>oauth-resource-server</module>
+        <module>oauth-resource-server-1</module>
+        <module>oauth-resource-server-2</module>
     </modules>
 
 </project>
