@@ -18,7 +18,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 @EnableAuthorizationServer
-public class OAuth2AuthorizationServerConfigJwt extends AuthorizationServerConfigurerAdapter {
+public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     @Qualifier("authenticationManagerBean")
@@ -38,17 +38,13 @@ public class OAuth2AuthorizationServerConfigJwt extends AuthorizationServerConfi
     public void configure(final ClientDetailsServiceConfigurer clients) throws Exception { // @formatter:off
         clients
           .inMemory()
-          .withClient("sampleClientId")
-            .authorizedGrantTypes("implicit").scopes("read", "write", "foo", "bar").autoApprove(false).accessTokenValiditySeconds(3600)
-            
-          .and()
-          .withClient("fooClientIdPassword").secret("secret")
-            .authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("foo", "read", "write")
+          .withClient("fooClientId").secret("secret")
+            .authorizedGrantTypes("authorization_code", "refresh_token", "password").scopes("fooScope", "readScope", "writeScope")
             .accessTokenValiditySeconds(3600 /*1 hour*/).refreshTokenValiditySeconds(2592000 /*30 days*/)
           
           .and()
-            .withClient("barClientIdPassword").secret("secret")
-            .authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("bar", "read", "write")
+            .withClient("barClientId").secret("secret")
+            .authorizedGrantTypes("authorization_code", "refresh_token", "password").scopes("barScope", "readScope", "writeScope")
             .accessTokenValiditySeconds(3600 /*1 hour*/).refreshTokenValiditySeconds(2592000 /*30 days*/)
         ;
     } // @formatter:on

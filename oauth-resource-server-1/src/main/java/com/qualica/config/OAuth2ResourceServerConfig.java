@@ -27,7 +27,7 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
     @Override
     public void configure(final HttpSecurity http) throws Exception {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and().authorizeRequests()
-                // .access("#oauth2.hasScope('read')")
+                // .access("#oauth2.hasScope('readScope')")
                 .anyRequest().permitAll();
 
     }

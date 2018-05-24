@@ -19,7 +19,7 @@ public class UserController {
     @Autowired
     private TokenStore tokenStore;
 
-    @PreAuthorize("#oauth2.hasScope('read')")
+    @PreAuthorize("#oauth2.hasScope('readScope')")
     @RequestMapping(method = RequestMethod.GET, value = "/users/extra")
     @ResponseBody
     public Map<String, Object> getExtraInfo(OAuth2Authentication auth) {

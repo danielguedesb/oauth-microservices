@@ -25,7 +25,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.qualica.config.AuthorizationServerApplication;
+import com.qualica.AuthorizationServerApplication;
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
@@ -41,7 +41,7 @@ public class OAuthMvcTest {
 
     private MockMvc mockMvc;
 
-    private static final String CLIENT_ID = "fooClientIdPassword";
+    private static final String CLIENT_ID = "fooClientId";
     private static final String CLIENT_SECRET = "secret";
 
     private static final String CONTENT_TYPE = "application/json;charset=UTF-8";

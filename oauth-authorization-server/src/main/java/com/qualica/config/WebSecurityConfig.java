@@ -1,6 +1,7 @@
 package com.qualica.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 @Configuration
+@EnableDiscoveryClient
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -29,16 +31,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(final HttpSecurity http) throws Exception {
-        // @formatter:off
-		http.authorizeRequests().antMatchers("/login").permitAll()
-		.antMatchers("/oauth/token/revokeById/**").permitAll()
-		.antMatchers("/tokens/**").permitAll()
-		.anyRequest().authenticated()
-		.and().formLogin().permitAll()
-		.and().csrf().disable();
-		// @formatter:on
-    }
+    protected void configure(final HttpSecurity http) throws Exception {// @formatter:off
+	http.authorizeRequests()
+	.antMatchers("/login").permitAll()
+	.antMatchers("/oauth/token/revokeById/**").permitAll()
+	.antMatchers("/tokens/**").permitAll()
+	.anyRequest().authenticated()
+	.and().formLogin().loginPage("/login").permitAll()
+	.and().csrf().disable();
+    }// @formatter:on
 
     @SuppressWarnings("deprecation")
     @Bean

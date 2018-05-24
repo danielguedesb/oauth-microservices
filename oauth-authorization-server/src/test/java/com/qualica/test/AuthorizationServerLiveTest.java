@@ -16,7 +16,7 @@ public class AuthorizationServerLiveTest {
 
     @Test
     public void whenObtainingAccessToken_thenOK() {
-        final Response authServerResponse = obtainAccessToken("fooClientIdPassword", "secret", "john", "123");
+        final Response authServerResponse = obtainAccessToken("fooClientId", "secret", "john", "123");
         final String accessToken = authServerResponse.jsonPath().getString("access_token");
         assertNotNull(accessToken);
     }
@@ -34,20 +34,4 @@ public class AuthorizationServerLiveTest {
         // response.jsonPath().getString("access_token")
     }
 
-    private String obtainRefreshToken(String clientId, final String refreshToken) {
-        final Map<String, String> params = new HashMap<String, String>();
-        params.put("grant_type", "refresh_token");
-        params.put("client_id", clientId);
-        params.put("refresh_token", refreshToken);
-        final Response response = RestAssured.given().auth().preemptive().basic(clientId, "secret").and().with().params(params).when().post("http://localhost:8081/oauth-authorization-server/oauth/token");
-        return response.jsonPath().getString("access_token");
-    }
-
-    private void authorizeClient(String clientId) {
-        final Map<String, String> params = new HashMap<String, String>();
-        params.put("response_type", "code");
-        params.put("client_id", clientId);
-        params.put("scope", "read,write");
-        final Response response = RestAssured.given().auth().preemptive().basic(clientId, "secret").and().with().params(params).when().post("http://localhost:8081/oauth-authorization-server/oauth/authorize");
-    }
 }

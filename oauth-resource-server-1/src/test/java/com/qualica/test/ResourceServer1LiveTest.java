@@ -42,7 +42,7 @@ public class ResourceServer1LiveTest {
     //
 
     private String obtainAccessTokenViaPasswordGrant(final String username, final String password) {
-        final Response authServerResponse = obtainAccessTokenViaPasswordGrantRaw("fooClientIdPassword", "secret", username, password);
+        final Response authServerResponse = obtainAccessTokenViaPasswordGrantRaw("fooClientId", "secret", username, password);
         final String accessToken = authServerResponse.jsonPath().getString("access_token");
         return accessToken;
     }

@@ -1,15 +1,46 @@
+spring:
+  aop:
+    proxy-target-class: true
+  application:
+    name: api-gateway-zuul
+    
 server:
   port: 8080
-  
-zuul:  
-  routes:    
-    startpage:
-      path: /**
-      url: http://localhost:8081
-    foos:      
-      path: /foos/**
-      url: http://localhost:8082/oauth-resource-server-1/foos
-    third:
-      path: /third/**
-      url: http://localhost:8083/oauth-resource-server-2/third
 
+eureka:
+  instance:
+      hostname: localhost
+      non-secure-port: 8761
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.non-secure-port}/eureka/
+
+zuul:
+  routes:
+    oauth-resource-server-1: /oauth-resource-server-1/**
+    oauth-resource-server-2: /oauth-resource-server-2/**
+    oauth-authorization-server-service:
+      sensitiveHeaders:
+      path: /oauth-authorization-server/**
+      stripPrefix: false
+  add-proxy-headers: true
+
+security:
+  oauth2:
+    sso:
+      loginPath: /login
+    client:
+      accessTokenUri: http://oauth-authorization-server-service/oauth-authorization-server/oauth/token
+      userAuthorizationUri: /oauth-authorization-server/oauth/authorize
+      clientId: fooClientId
+      clientSecret: secret
+    resource:
+      jwt:
+        keyValue: "abc"
+      id: foos
+      serviceId: ${PREFIX:}resource
+
+logging:
+  level.org.springframework.security: DEBUG
+
+#http://localhost:8080/login
