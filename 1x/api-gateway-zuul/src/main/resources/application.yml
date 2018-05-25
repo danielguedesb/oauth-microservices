@@ -1,0 +1,46 @@
+spring:
+  aop:
+    proxyTargetClass: true
+  application:
+    name: api-gateway-zuul
+
+server:
+  port: 8765
+
+eureka:
+  instance:
+      hostname: localhost
+      port: 8761
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+
+zuul:
+  routes:
+    resource-service-new: /resource-server-new/**
+    authorization-server:
+      sensitiveHeaders:
+      path: /authorization-server/**
+      stripPrefix: false
+  add-proxy-headers: true
+
+security:
+  basic:
+    enabled: false
+  oauth2:
+    sso:
+      loginPath: /login
+    client:
+      accessTokenUri: http://authorization-server/authorization-server/oauth/token
+      userAuthorizationUri: /authorization-server/oauth/authorize
+      clientId: acme
+      clientSecret: acmesecret
+    resource:
+      jwt:
+        keyValue: "abc"
+      id: fooScope
+      serviceId: ${PREFIX:}resource
+
+logging:
+  level.org.springframework.security: DEBUG
+
