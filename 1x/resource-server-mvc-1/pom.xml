@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>resource-service-new</artifactId>
+    <artifactId>resource-server-mvc-1</artifactId>
     <packaging>jar</packaging>
 
-    <name>resource-service-new</name>
+    <name>resource-server-mvc-1</name>
 
     <parent>
         <groupId>com.qualica</groupId>

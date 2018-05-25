@@ -15,7 +15,7 @@ public class ApiGatewayApplication {
             .route(r ->
                 r.path("/foos/**")
                 // .filters(f -> f.stripPrefix(1))
-                .uri("http://localhost:8082/oauth-resource-server-1/foos")
+                .uri("http://localhost:8082/resource-server-mvc-2/foos")
             ).build();
     }// @formatter:on
 

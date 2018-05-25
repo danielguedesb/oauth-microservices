@@ -92,8 +92,8 @@
         <module>authorization-server-2</module>
         <module>api-gateway-zuul-2</module>
         <module>service-registry-2</module>
-        <module>oauth-resource-server-1</module>
-        <module>oauth-resource-server-2</module>
+        <module>resource-server-mvc-2</module>
+        <module>resource-server-rest-2</module>
     </modules>
 
     <repositories>

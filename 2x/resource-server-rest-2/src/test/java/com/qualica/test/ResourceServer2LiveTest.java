@@ -13,30 +13,14 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
 @Ignore
-public class ResourceServer1LiveTest {
+public class ResourceServer2LiveTest {
 
     @Test
-    public void givenAccessToken_whenConsumingFoos_thenOK() {
+    public void givenUserWithNoAdminAccess_whenConsumingThirdOperation_thenForbidden() {
         final String accessToken = obtainAccessTokenViaPasswordGrant("john", "123");
 
-        final Response resourceServerResponse = RestAssured.given().header("Authorization", "Bearer " + accessToken).get("http://localhost:8082/oauth-resource-server-1/foos/100");
-        assertThat(resourceServerResponse.getStatusCode(), equalTo(200));
-    }
-
-    @Test
-    public void givenUserWithNoAdminAccess_whenConsumingAdminOperation_thenForbidden() {
-        final String accessToken = obtainAccessTokenViaPasswordGrant("john", "123");
-
-        final Response resourceServerResponse = RestAssured.given().header("Authorization", "Bearer " + accessToken).get("http://localhost:8082/oauth-resource-server-1/bars/100");
+        final Response resourceServerResponse = RestAssured.given().header("Authorization", "Bearer " + accessToken).get("http://localhost:8083/resource-server-rest-2/third/100");
         assertThat(resourceServerResponse.getStatusCode(), equalTo(403));
-    }
-
-    @Test
-    public void givenUserWithAdminAccess_whenConsumingAdminOperation_thenOK() {
-        final String accessToken = obtainAccessTokenViaPasswordGrant("tom", "111");
-
-        final Response resourceServerResponse = RestAssured.given().header("Authorization", "Bearer " + accessToken).get("http://localhost:8082/oauth-resource-server-1/bars/100");
-        assertThat(resourceServerResponse.getStatusCode(), equalTo(200));
     }
 
     //

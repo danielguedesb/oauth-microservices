@@ -17,7 +17,7 @@ eureka:
 
 zuul:
   routes:
-    resource-service-new: /resource-server-new/**
+    resource-server-mvc-1: /resource-server-mvc-1/**
     authorization-server:
       sensitiveHeaders:
       path: /authorization-server/**

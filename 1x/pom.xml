@@ -18,7 +18,7 @@
     <modules>
         <module>api-gateway-zuul</module>
         <module>service-registry</module>
-        <module>resource-service-new</module>
+        <module>resource-server-mvc-1</module>
         <module>authorization-server</module>
     </modules>
 
