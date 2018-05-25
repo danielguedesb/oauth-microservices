@@ -1,4 +1,4 @@
-package com.qualica.web.controller;
+package com.qualica.web;
 
 import java.security.Principal;
 

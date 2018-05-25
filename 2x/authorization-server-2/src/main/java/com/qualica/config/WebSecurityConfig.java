@@ -14,6 +14,16 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 @EnableDiscoveryClient
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Override
+    protected void configure(final HttpSecurity http) throws Exception {// @formatter:off
+        http
+        .authorizeRequests()
+        .antMatchers("/login").permitAll()
+        .antMatchers("/tokens/**").permitAll()
+        .anyRequest().authenticated()
+        .and().formLogin().loginPage("/login").permitAll();
+    }// @formatter:on
+
     @Autowired
     public void globalUserDetails(final AuthenticationManagerBuilder auth) throws Exception {
         // @formatter:off
@@ -29,17 +39,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
-    @Override
-    protected void configure(final HttpSecurity http) throws Exception {// @formatter:off
-	http.authorizeRequests()
-	.antMatchers("/login").permitAll()
-	.antMatchers("/oauth/token/revokeById/**").permitAll()
-	.antMatchers("/tokens/**").permitAll()
-	.anyRequest().authenticated()
-	.and().formLogin().loginPage("/login").permitAll()
-	.and().csrf().disable();
-    }// @formatter:on
 
     @SuppressWarnings("deprecation")
     @Bean

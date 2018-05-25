@@ -1,4 +1,4 @@
-package com.qualica;
+package com.qualica.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,7 +14,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 
 @Configuration
 @EnableAuthorizationServer
-public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
+public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     @Qualifier("authenticationManagerBean")
@@ -29,7 +29,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory().withClient("fooClient").secret("fooSecret").authorizedGrantTypes("authorization_code", "refresh_token", "password").scopes("fooScope");
+        clients.inMemory().withClient("fooClient").secret("fooSecret").authorizedGrantTypes("authorization_code", "refresh_token").scopes("fooScope");
     }
 
     @Override

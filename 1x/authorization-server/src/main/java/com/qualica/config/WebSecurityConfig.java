@@ -1,4 +1,4 @@
-package com.qualica;
+package com.qualica.config;
 
 import org.springframework.boot.actuate.autoconfigure.ManagementServerProperties;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,20 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Order(ManagementServerProperties.ACCESS_OVERRIDE_ORDER)
 @Configuration
-public class LoginConfiguration extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception { // @formatter:off
+        http
+        .authorizeRequests()
+        .anyRequest().authenticated()
+        .and().formLogin().loginPage("/login").permitAll();
+    }// @formatter:on
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication().withUser("user").password("password").roles("USER").and().withUser("admin").password("admin").roles("ADMIN");
+    }
 
     @Override
     @Bean
@@ -19,14 +32,4 @@ public class LoginConfiguration extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin().loginPage("/login").permitAll().and().authorizeRequests().anyRequest().authenticated();
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("password").roles("USER").and().withUser("admin").password("admin").roles("ADMIN");
-        // auth.parentAuthenticationManager(authenticationManager);
-    }
 }

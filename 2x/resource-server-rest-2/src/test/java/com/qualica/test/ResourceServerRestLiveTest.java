@@ -13,7 +13,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
 @Ignore
-public class ResourceServer1LiveTest {
+public class ResourceServerRestLiveTest {
 
     @Test
     public void givenAccessToken_whenConsumingFoos_thenOK() {
