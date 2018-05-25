@@ -21,4 +21,4 @@ security:
       jwt:
         keyValue: "abc"
       id: fooScope
-      serviceId: ${PREFIX:}resource
+      service-id: ${PREFIX:}resource
