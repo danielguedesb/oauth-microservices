@@ -19,6 +19,7 @@
         <module>api-gateway-zuul</module>
         <module>service-registry</module>
         <module>resource-server-mvc-1</module>
+        <module>resource-server-mvc-no-oauth-1</module>
         <module>authorization-server-1</module>
     </modules>
 
