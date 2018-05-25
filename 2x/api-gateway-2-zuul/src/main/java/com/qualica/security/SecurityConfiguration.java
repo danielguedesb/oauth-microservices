@@ -53,7 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception { // @formatter:off
         http.authorizeRequests()
-            .antMatchers("/oauth-authorization-server/**", "/login").permitAll()
+            .antMatchers("/authorization-server-2/**", "/login").permitAll()
             .anyRequest().authenticated()
             .and().csrf().requireCsrfProtectionMatcher(csrfRequestMatcher()).csrfTokenRepository(csrfTokenRepository())
             .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class).addFilterAfter(oAuth2AuthenticationProcessingFilter(), AbstractPreAuthenticatedProcessingFilter.class)
@@ -83,7 +83,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             private final Pattern allowedMethods = Pattern.compile("^(GET|HEAD|OPTIONS|TRACE)$");
 
             // Disable CSFR protection on the following urls:
-            private final AntPathRequestMatcher[] requestMatchers = { new AntPathRequestMatcher("/oauth-authorization-server/**") };
+            private final AntPathRequestMatcher[] requestMatchers = { new AntPathRequestMatcher("/authorization-server-2/**") };
 
             @Override
             public boolean matches(HttpServletRequest request) {

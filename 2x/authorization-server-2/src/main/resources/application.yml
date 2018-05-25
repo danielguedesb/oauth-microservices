@@ -1,6 +1,6 @@
 spring:
   application:
-    name: oauth-authorization-server
+    name: authorization-server-2
 
 server:
   port: 8769
@@ -19,4 +19,4 @@ eureka:
 logging:
   level.org.springframework.security: DEBUG
 
-# http://localhost:8081/oauth-authorization-server/login
+# http://localhost:8081/authorization-server-2/login

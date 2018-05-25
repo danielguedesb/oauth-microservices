@@ -53,7 +53,7 @@ public class ResourceServer1LiveTest {
         params.put("client_id", clientId);
         params.put("username", username);
         params.put("password", password);
-        return RestAssured.given().auth().preemptive().basic(clientId, clientSecret).and().with().params(params).when().post("http://localhost:8081/oauth-authorization-server/oauth/token");
+        return RestAssured.given().auth().preemptive().basic(clientId, clientSecret).and().with().params(params).when().post("http://localhost:8081/authorization-server-2/oauth/token");
         // response.jsonPath().getString("refresh_token");
         // response.jsonPath().getString("access_token")
     }
