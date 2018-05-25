@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: oauth-resource-server-1
+
+server:
+  port: 8870
+
+eureka:
+  instance:
+      hostname: localhost
+      non-secure-port: 8761
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.non-secure-port}/eureka/
+
+security:
+  oauth2:
+    resource:
+      jwt:
+        keyValue: "abc"
+      id: fooScope
+      serviceId: ${PREFIX:}resource
