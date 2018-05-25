@@ -22,11 +22,6 @@
         <module>authorization-server</module>
     </modules>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
-    </properties>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -61,5 +56,10 @@
             </releases>
         </repository>
     </repositories>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+    </properties>
 
 </project>

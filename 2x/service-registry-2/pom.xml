@@ -27,8 +27,4 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <finalName>service-registry-2</finalName>
-    </build>
-
 </project>
