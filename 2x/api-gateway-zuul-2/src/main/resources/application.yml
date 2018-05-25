@@ -2,7 +2,7 @@ spring:
   aop:
     proxy-target-class: true
   application:
-    name: api-gateway-2-zuul
+    name: api-gateway-zuul-2
     
 server:
   port: 8765
