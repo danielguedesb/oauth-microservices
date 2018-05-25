@@ -29,7 +29,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory().withClient("acme").secret("acmesecret").authorizedGrantTypes("authorization_code", "refresh_token", "password").scopes("fooScope");
+        clients.inMemory().withClient("fooClient").secret("fooSecret").authorizedGrantTypes("authorization_code", "refresh_token", "password").scopes("fooScope");
     }
 
     @Override
