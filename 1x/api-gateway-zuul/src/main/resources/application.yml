@@ -18,9 +18,9 @@ eureka:
 zuul:
   routes:
     resource-server-mvc-1: /resource-server-mvc-1/**
-    authorization-server:
+    authorization-server-1:
       sensitiveHeaders:
-      path: /authorization-server/**
+      path: /authorization-server-1/**
       stripPrefix: false
   add-proxy-headers: true
 
@@ -31,8 +31,8 @@ security:
     sso:
       loginPath: /login
     client:
-      accessTokenUri: http://authorization-server/authorization-server/oauth/token
-      userAuthorizationUri: /authorization-server/oauth/authorize
+      accessTokenUri: http://authorization-server-1/authorization-server-1/oauth/token
+      userAuthorizationUri: /authorization-server-1/oauth/authorize
       clientId: fooClient
       clientSecret: fooSecret
     resource:

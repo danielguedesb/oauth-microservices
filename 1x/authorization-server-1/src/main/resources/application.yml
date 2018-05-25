@@ -1,10 +1,10 @@
 spring:
   application:
-    name: authorization-server
+    name: authorization-server-1
 
 server:
   port: 8769
-  context-path: /authorization-server
+  context-path: /authorization-server-1
   use-forward-headers: false
 
 eureka:

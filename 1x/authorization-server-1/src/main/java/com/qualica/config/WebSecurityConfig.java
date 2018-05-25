@@ -1,5 +1,6 @@
 package com.qualica.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.ManagementServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,10 +22,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .and().formLogin().loginPage("/login").permitAll();
     }// @formatter:on
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("password").roles("USER").and().withUser("admin").password("admin").roles("ADMIN");
-    }
+    @Autowired
+    public void globalUserDetails(final AuthenticationManagerBuilder auth) throws Exception { // @formatter:off
+        auth.inMemoryAuthentication()  
+        .withUser("user").password("password").roles("USER")
+        .and().withUser("admin").password("admin").roles("ADMIN");
+    }// @formatter:on
 
     @Override
     @Bean
