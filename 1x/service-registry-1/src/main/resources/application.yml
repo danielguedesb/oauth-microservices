@@ -1,6 +1,6 @@
 spring:
   application:
-    name: service-registry
+    name: service-registry-1
 
 server:
   port: 8761
