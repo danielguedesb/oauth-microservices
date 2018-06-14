@@ -46,8 +46,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     @Primary
-    public OAuth2ClientContextFilter dynamicOauth2ClientContextFilter() {
-        return new DynamicOauth2ClientContextFilter();
+    public OAuth2ClientContextFilter oauth2ClientContextFilterWithPath() {
+        return new Oauth2ClientContextFilterWithPath();
     }
 
     @Override
