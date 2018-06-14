@@ -16,7 +16,7 @@
     </parent>
 
     <modules>
-        <module>api-gateway-zuul</module>
+        <module>api-gateway-zuul-1</module>
         <module>service-registry</module>
         <module>resource-server-mvc-1</module>
         <module>resource-server-mvc-no-oauth-1</module>
