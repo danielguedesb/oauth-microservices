@@ -21,6 +21,9 @@ When starting up the services, the sequence should be - `service-registry-1` fir
 Once everything starts up, try to access the Resource Server, through the Gateway: 
 `http://localhost:8765/resource-server-mvc-1`
 
+Or, if you're authenticating with an admin: 
+`http://localhost:8765/resource-server-mvc-1/secret`
+
 You'll be redirected to the Authorization Server to authenticate. 
 Use the following credentials: `user`/`password` or `admin`/`admin`. 
 And approve the authorization for the `fooScope` OAuth scope. 
@@ -71,7 +74,7 @@ Browser                             API Gateway (APIG)              Authorizatio
 ### Oauth2ClientContextFilterWithPath
 The custom OAuth2ClientContextFilter now supports URIs (paths), beyond just full URLs.
 We need this path support so that we're able to use it via `security.oauth2.client.userAuthorizationUri` in Zuul, to redirect to Zuul itself.
-Alternativelly, we could hardcode this to: `http://localhost:${server.port}/authorization-server-1/oauth/authorize` (not ideal)
+Alternatively, we could hardcode this to: `http://localhost:${server.port}/authorization-server-1/oauth/authorize` (not ideal)
 
 
 ### `zuul.authorization-server-1.sensitiveHeaders`
