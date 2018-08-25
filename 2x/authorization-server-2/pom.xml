@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>com.qualica</groupId>
+        <groupId>com.baeldung</groupId>
         <artifactId>spring-security-oauth-2</artifactId>
         <version>1.0.1-SNAPSHOT</version>
     </parent>

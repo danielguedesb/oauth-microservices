@@ -9,7 +9,7 @@
     <name>resource-server-mvc-no-oauth-1</name>
 
     <parent>
-        <groupId>com.qualica</groupId>
+        <groupId>com.baeldung</groupId>
         <artifactId>spring-security-oauth-1</artifactId>
         <version>0.0.6</version>
     </parent>
